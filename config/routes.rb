@@ -14,10 +14,10 @@ Rails.application.routes.draw do
   
   # UPDATE
   
-  post("/modify_bookmark/:path_id", { :controller => "bookmarks", :action => "update" })
+  post("/modify_bookmarks/:path_id", { :controller => "bookmarks", :action => "update" })
   
   # DELETE
-  get("/delete_bookmark/:path_id", { :controller => "bookmarks", :action => "destroy" })
+  get("/delete_bookmarks/:path_id", { :controller => "bookmarks", :action => "destroy" })
 
   #------------------------------
 
@@ -113,9 +113,9 @@ Rails.application.routes.draw do
   post("/insert_actor", { :controller => "actors", :action => "create" })
           
   # READ
-  get("/actors", { :controller => "actors", :action => "index" })
+  get("/actor", { :controller => "actors", :action => "index" })
   
-  get("/actors/:path_id", { :controller => "actors", :action => "show" })
+  get("/actor/:path_id", { :controller => "actors", :action => "show" })
   
   # UPDATE
   
