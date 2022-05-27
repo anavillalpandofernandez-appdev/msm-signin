@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get("/add_bookmark", { :controller => "movies", :action => "add_user_bookmark" })
+
   # Routes for the Bookmark resource:
 
   # CREATE
@@ -45,6 +47,8 @@ Rails.application.routes.draw do
   get("/user_sign_out", { :controller => "user_authentication", :action => "destroy_cookies" })
              
   #------------------------------
+
+  get("/", { :controller => "movies", :action => "index" })
 
   # Routes for the Character resource:
 

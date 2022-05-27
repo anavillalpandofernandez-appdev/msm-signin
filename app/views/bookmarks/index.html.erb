@@ -1,253 +1,83 @@
-   <nav>
-      <ul>
-          <li>
-            <a href="/user_sign_out">
-              Sign out
-            </a>
-          </li>
-          <li>
-            <a href="/bookmarks">
-              My bookmarks
-            </a>
-          </li>
-        <li>
-          <a href="/">
-            Home
-          </a>
-        </li>
-      </ul>
-    </nav>
+<div>
+  <div>
+    <h1>
+      <%= @current_user.first_name %>'s bookmarks
+    </h1>
+  </div>
+</div>
 
-    <h1>Ana Villalpando Fernandez's bookmarks</h1>
-
-<form action="/insert_bookmark" method="post">
-
-  <select name="query_movie_id" id="movie_id_box">
-    
-      <option value="1">
-        The Shawshank Redemption
-      </option>
-
-      <option value="2">
-        The Godfather
-      </option>
-
-      <option value="3">
-        The Godfather: Part II
-      </option>
-
-      <option value="4">
-        The Dark Knight
-      </option>
-
-      <option value="5">
-        12 Angry Men
-      </option>
-
-      <option value="6">
-        Schindler&#39;s List
-      </option>
-
-      <option value="7">
-        The Lord of the Rings: The Return of the King
-      </option>
-
-      <option value="8">
-        Pulp Fiction
-      </option>
-
-      <option value="9">
-        The Good, the Bad and the Ugly
-      </option>
-
-      <option value="10">
-        The Lord of the Rings: The Fellowship of the Ring
-      </option>
-
-      <option value="11">
-        Fight Club
-      </option>
-
-      <option value="12">
-        Forrest Gump
-      </option>
-
-      <option value="13">
-        Inception
-      </option>
-
-      <option value="14">
-        The Lord of the Rings: The Two Towers
-      </option>
-
-      <option value="15">
-        The Empire Strikes Back
-      </option>
-
-      <option value="16">
-        The Matrix
-      </option>
-
-      <option value="17">
-        GoodFellas
-      </option>
-
-      <option value="18">
-        One Flew Over the Cuckoo&#39;s Nest
-      </option>
-
-      <option value="19">
-        Seven Samurai
-      </option>
-
-      <option value="20">
-        Se7en
-      </option>
-
-      <option value="21">
-        Life Is Beautiful
-      </option>
-
-      <option value="22">
-        City of God
-      </option>
-
-      <option value="23">
-        The Silence of the Lambs
-      </option>
-
-      <option value="24">
-        It&#39;s a Wonderful Life
-      </option>
-
-      <option value="25">
-        Star Wars
-      </option>
-
-      <option value="26">
-        Saving Private Ryan
-      </option>
-
-      <option value="27">
-        Spirited Away
-      </option>
-
-      <option value="28">
-        The Green Mile
-      </option>
-
-      <option value="29">
-        Interstellar
-      </option>
-
-      <option value="30">
-        Parasite
-      </option>
-
-      <option value="31">
-        Léon: The Professional
-      </option>
-
-      <option value="32">
-        The Usual Suspects
-      </option>
-
-      <option value="33">
-        Harakiri
-      </option>
-
-      <option value="34">
-        The Lion King
-      </option>
-
-      <option value="35">
-        Back to the Future
-      </option>
-
-      <option value="36">
-        The Pianist
-      </option>
-
-      <option value="37">
-        Terminator 2: Judgment Day
-      </option>
-
-      <option value="38">
-        American History X
-      </option>
-
-      <option value="39">
-        Modern Times
-      </option>
-
-      <option value="40">
-        Psycho
-      </option>
-
-      <option value="41">
-        Gladiator
-      </option>
-
-      <option value="42">
-        City Lights
-      </option>
-
-      <option value="43">
-        The Departed
-      </option>
-
-      <option value="44">
-        The Intouchables
-      </option>
-
-      <option value="45">
-        Whiplash
-      </option>
-
-      <option value="46">
-        The Prestige
-      </option>
-
-      <option value="47">
-        Grave of the Fireflies
-      </option>
-
-      <option value="48">
-        Hamilton
-      </option>
-
-      <option value="49">
-        Once Upon a Time in the West
-      </option>
-
-      <option value="50">
-        Casablanca
-      </option>
-
-      <option value="51">
-        Cinema Paradiso
-      </option>
-
-      <option value="52">
-        Rear Window
-      </option>
-</select>
-  <button>
-    Bookmark this movie!
-  </button>
-</form>
 <hr>
-<table class="table" border="1">
-  <tr>
-    <th>
-      Movie
-    </th>
 
-    <th>
-      Created at
-    </th>
+<div>
+  <div>
+    <h2>
+      Add a new bookmark
+    </h2>
 
-    <th>
-    </th>
-  </tr>
-</table>
+    <form action="/insert_bookmark" method="post">
+      <div>
+        <label for="movie_id_box">
+          Movie
+        </label>
+
+        <%# <input type="text" id="movie_id_box" name="query_movie_id"> %>
+
+        <select name="query_movie_id">
+          <%= Movie.all.order(:title).each do |a_movie| %>
+            <option value="<%= a_movie.id %>">
+              <%= a_movie.title %>
+            </option>
+          <% end %>
+        </select>
+
+      </div>
+
+      <button>
+        Bookmark this movie!
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          Movie
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+         
+        </th>
+
+      </tr>
+
+      <% @list_of_bookmarks.each do |a_bookmark| %>
+      <tr>
+
+        <td>
+          <%= a_bookmark.movie.title %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_bookmark.created_at) %> ago
+        </td>
+
+        <td>
+          <a href="/delete_bookmark/<%= a_bookmark.id %>">
+            Un-bookmark
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
